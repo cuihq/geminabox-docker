@@ -6,8 +6,6 @@ LABEL geminabox_version="0.13.5"
 WORKDIR /geminabox
 ADD . /geminabox
 
-ENV RUBYGEMS_PROXY=true
-
 RUN apk add --no-cache --virtual .gem-build gcc libc-dev make \
     && bundle --without development test \
     && apk del .gem-build
