@@ -1,0 +1,35 @@
+<h2 class="gem-listing-title">Gem Listing</h2>
+
+<% if @gems.any? %>
+    <div id="alpha_index"><%= ("a".."z").map { |i| @index_gems.include?(i) ? "<a href='#jump_#{i}'>#{i}</a>" : i }.join(" - ") %></div>
+    <table class="table">
+      <thead>
+      <th>Name</th>
+      <th>Author</th>
+      <th>Versions</th>
+      </thead>
+      <tbody>
+      <% @gems.by_name do |name, versions| %>
+          <tr>
+            <td><a href="<%= url("/gems/#{name}") %>"><%= name %></a></td>
+            <td>
+              <% if spec = spec_for(name, versions.newest.number) %>
+                  <%= spec.authors.map do |author|
+                    "<a href='#{spec.homepage}'>#{author}</a>"
+                  end.join(', ') %>
+              <% end %>
+            </td>
+            <td class="versions">
+              <%= versions.each.reverse_each.first(5).map do |version|
+                "<a class='version' href='#{ url("/gems/#{name}#version-#{version.number.to_s.gsub '.', '_'}") }'>#{version.number}</a>"
+              end.join(', ') %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% else %>
+    <p>No gems have been added to the Gem in a Box server yet.</p>
+    <h4><a href="/upload">Add/Upload a new Gem</a></h4>
+<% end %>
+

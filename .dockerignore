@@ -1,0 +1,9 @@
+.git
+.gitignore
+.ruby-gemset
+.ruby-version
+.DS_Store
+/data/
+Rakefile
+Gemfile.lock
+README.md
