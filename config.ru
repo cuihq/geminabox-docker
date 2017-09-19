@@ -10,7 +10,7 @@ default_config = {
   'allow_replace' => false,
   'styling' => 'bootstrap',
   'auth' => false
-}.
+}.freeze
 config_file = "#{File.dirname(__FILE__)}/data/config.yml"
 File.write(config_file, default_config.to_yaml) unless File.exist? config_file
 
