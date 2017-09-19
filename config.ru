@@ -1,29 +1,28 @@
 require 'yaml'
 require 'geminabox'
 
-Geminabox.data = '/geminabox/data'
+Geminabox.data = "#{File.dirname(__FILE__)}/data"
 
+default_config = {
+  'rubygems_proxy' => true,
+  'allow_upload' => false,
+  'allow_delete' => false,
+  'allow_replace' => false,
+  'styling' => 'bootstrap',
+  'auth' => false
+}.
 config_file = "#{File.dirname(__FILE__)}/data/config.yml"
-unless File.exist? config_file
-  File.write config_file, {
-    'rubygems_proxy' => true,
-    'allow_upload' => false,
-    'allow_delete' => false,
-    'allow_replace' => false,
-    'styling' => 'bootstrap',
-    'auth' => false
-  }.to_yaml
-end
+File.write(config_file, default_config.to_yaml) unless File.exist? config_file
 
 config = YAML.load_file config_file
-Geminabox.rubygems_proxy = config['rubygems_proxy']
-Geminabox.allow_upload = config['allow_upload']
-Geminabox.allow_delete = config['allow_delete']
-Geminabox.allow_replace = config['allow_replace']
+%w(rubygems_proxy allow_upload allow_delete allow_replace).each do |name|
+  value = config[name] || default_config[name]
+  Geminabox.send("#{name}=", value)
+end
 
 if config['styling'] == 'bootstrap'
-  Geminabox.views = '/geminabox/views'
-  Geminabox.public_folder = '/geminabox/public'
+  Geminabox.views = "#{File.dirname(__FILE__)}/views"
+  Geminabox.public_folder = "#{File.dirname(__FILE__)}/public"
 end
 
 if config['auth']

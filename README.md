@@ -21,15 +21,6 @@ docker run -d -p 9292:9292 \
 
 /geminabox/data/config.yml
 
-name | desc
---|--
-rubygems_proxy | rubygems proxy, default true
-allow_upload | allow update, default false
-allow_delete | allow delete, default false
-allow_replace | allow replace, default false
-styling | theme bootstrap or default
-auth | default false
-
 ```yaml
 ---
 rubygems_proxy: true
@@ -41,3 +32,12 @@ auth:
 - username
 - password
 ```
+
+name | desc
+--|--
+rubygems_proxy | rubygems proxy, default true
+allow_upload | allow update, default false
+allow_delete | allow delete, default false
+allow_replace | allow replace, default false
+styling | theme bootstrap or default
+auth | default false
