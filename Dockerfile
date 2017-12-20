@@ -1,7 +1,7 @@
 FROM ruby:2.4.1-alpine3.6
 
 LABEL maintainer="cuihaiqin@gmail.com"
-LABEL geminabox_version="0.13.5"
+LABEL geminabox_version="0.13.11"
 
 WORKDIR /geminabox
 ADD . /geminabox
